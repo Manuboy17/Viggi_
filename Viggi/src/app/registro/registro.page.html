@@ -3,30 +3,34 @@
     <div class="logo">
       <img src="assets\img\logo.png" alt="" />
     </div>
-    <div class="welcome">
-      <h1>Registro</h1>
-    </div>
-    <div class="log">
-      <div>
-        <ion-input label="Usuario" placeholder="Ingrese su usuario"></ion-input>
-      </div>
-      <div>
-        <ion-input label="Correo" type="email" placeholder="email@gamil.com"></ion-input>
-      </div>
-      <div>
-        <ion-input label="Contraseña" type="password" placeholder="Ingrese su contraseña"></ion-input>
-      </div>
-      <div>
-        <ion-input label="Contraseña" type="password" placeholder="Ingrese su contraseña nuevamente"></ion-input>
-      </div>
-      <div class="boton">  
-        <ion-button size="medium"><a style="text-decoration: none; color: white ;" routerLink="/login">Registrarse</a></ion-button>
-      </div>
-    </div>
-    <div class="footer">
-      <div>
-        <a routerLink="/login">Ya tienes cuenta?</a>  
-      </div>
-    </div>
+    <ion-card class="formulario">
+      <ion-card-header>
+        <ion-card-title>Registro</ion-card-title>
+      </ion-card-header>
+    
+      <ion-card-content class="formulario">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email"></ion-input>
+          </ion-item>
+    
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+          </ion-item>
+          
+          <ion-item>
+            <ion-label position="floating">Repetir contraseña</ion-label>
+            <ion-input type="password" formControlName="password2"></ion-input>
+          </ion-item>
+
+          <ion-button class="btn-submit" type="submit" expand="block" [disabled]="!form.valid">Registrar</ion-button>
+        </form>
+        <ion-text class="extra-options">
+          <a routerLink="/login">Ya tienes cuenta?</a>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>
