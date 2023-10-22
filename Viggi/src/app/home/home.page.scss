@@ -1,0 +1,32 @@
+* {
+  background-color: #0573BD;
+}
+#container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  height: 250px;
+  width: 250px;
+}
+.welcome > h1 {
+  color: white;
+}
+.opcion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.auto{
+  height: 50%;
+  width: 50%;
+}
+.furgon{
+  height: 60%;
+  width: 60%;
+}

@@ -1,0 +1,32 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <div class="logo">
+      <img src="assets\img\logo.png" alt="" />
+    </div>
+    <div class="welcome">
+      <h1>Registro</h1>
+    </div>
+    <div class="log">
+      <div>
+        <ion-input label="Usuario" placeholder="Ingrese su usuario"></ion-input>
+      </div>
+      <div>
+        <ion-input label="Correo" type="email" placeholder="email@gamil.com"></ion-input>
+      </div>
+      <div>
+        <ion-input label="Contraseña" type="password" placeholder="Ingrese su contraseña"></ion-input>
+      </div>
+      <div>
+        <ion-input label="Contraseña" type="password" placeholder="Ingrese su contraseña nuevamente"></ion-input>
+      </div>
+      <div class="boton">  
+        <ion-button size="medium"><a style="text-decoration: none; color: white ;" routerLink="/login">Registrarse</a></ion-button>
+      </div>
+    </div>
+    <div class="footer">
+      <div>
+        <a routerLink="/login">Ya tienes cuenta?</a>  
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,41 @@
+* {
+    background-color: #0573BD;
+    margin: 0;
+  }
+  #container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .logo {
+    height: 250px;
+    width: 250px;
+  }
+  .welcome > h1 {
+    color: white;
+  }
+  .opcion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .log {
+      background-color: #0573BD;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      padding: 20px;
+  }
+  .boton {
+      margin-top: 10px;
+  }
+  .footer {
+      padding: 30px;
+  }
+  .footer > div > a{
+      color: white;
+  }
+  
