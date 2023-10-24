@@ -22,10 +22,15 @@
     
           <ion-button class="btn-submit" type="submit" expand="block" [disabled]="!form.valid">Login</ion-button>
         </form>
-        <ion-text class="extra-options">
-          No tienes cuenta?Registrate aqui!
-          <a routerLink="/registro">Crea una cuenta!</a>
-        </ion-text>
+        <div class="extra-opc">
+          <ion-text class="extra-options">
+            <a routerLink="/missed-pass">Haz olvidado tu contraseña?.</a>
+          </ion-text>
+          <ion-text class="extra-options">
+            No tienes cuenta?Registrate aqui!
+            <a routerLink="/registro">Crea una cuenta!</a>
+          </ion-text>
+        </div>
       </ion-card-content>
     </ion-card>
   </div>

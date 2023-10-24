@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AngularFireAuth } from '@angular/fire';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { AlertController } from '@ionic/angular'; 
+import { Router } from '@angular/router'; 
 
 @Component({
   selector: 'app-registro',
@@ -9,8 +11,11 @@ import { AngularFireAuth } from '@angular/fire';
 })
 export class RegistroPage implements OnInit {
   form: FormGroup;
+
   constructor(
-    private afAuth: AngularFireAuth
+    private afAuth: Auth,
+    private alertController: AlertController, 
+    private router: Router 
   ) {
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -18,23 +23,48 @@ export class RegistroPage implements OnInit {
       password2: new FormControl('', [Validators.required, Validators.minLength(6)]),
     });
   }
-  login() {
-    this.afAuth.signInWithEmailAndPassword('correo@example.com', 'contraseña')
-      .then((userCredential: auth.UserCredential) => {
-        // Usuario ha iniciado sesión correctamente
-        const user = userCredential.user;
-        console.log('Usuario autenticado:', user);
-      })
-      .catch((error: any) => {
-        // Error al iniciar sesión
-        console.error('Error al iniciar sesión:', error);
-      });
+
+  async onSubmit() {
+    if (!this.form.valid) {
+      console.log("Fallo el registro");
+    } else {
+      const emailControl = this.form.get('email');
+      const passwordControl = this.form.get('password');
+
+      if (emailControl && passwordControl) {
+        const email = emailControl.value;
+        const password = passwordControl.value;
+        try {
+          // Crea el usuario en Firebase Authentication
+          const userCredential = await createUserWithEmailAndPassword(this.afAuth, email, password);
+
+          // Usuario registrado exitosamente
+          console.log('Usuario registrado:', userCredential.user);
+
+          this.form.reset();
+
+          // Muestra una alerta indicando que el usuario se ha creado con éxito
+          this.presentAlert('Usuario Creado', 'La cuenta se ha creado con éxito.');
+
+          // Redirige al usuario a la página de inicio de sesión
+          this.router.navigate(['/login']);
+        } catch (error) {
+          // Maneja errores de registro
+          console.error('Error al registrar usuario:', error);
+        }
+      }
+    }
   }
 
-  
-  
-  onSubmit() {
+  async presentAlert(title: string, message: string) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
-  ngOnInit() {
-  }
+
+  ngOnInit() {}
 }

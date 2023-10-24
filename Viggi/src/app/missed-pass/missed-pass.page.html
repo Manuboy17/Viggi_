@@ -3,16 +3,19 @@
     <div class="logo">
       <img src="assets\img\logo.png" alt="" />
     </div>
-    <div class="welcome">
-      <h1>Haz olvidado tu contraseña?</h1>
-    </div>
-    <div class="log">
-      <div>
-        <ion-input label="Correo" type="email" placeholder="email@gamil.com"></ion-input>
-      </div>
-      <div class="boton">  
-        <ion-button size="medium"><a style="text-decoration: none; color: white ;" routerLink="/login">Enviar</a></ion-button>
-      </div>
-    </div>
+    <ion-card class="formulario">
+      <ion-card-header>
+        <ion-card-title>Recupera tu contraseña</ion-card-title>
+      </ion-card-header>
+      <ion-card-content class="formulario">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input formControlName="email"></ion-input>
+          </ion-item>
+          <ion-button class="btn-submit" type="submit" expand="block" [disabled]="!form.valid">Login</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
   </div>
 </ion-content>

@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: 'TU_API_KEY',
-    authDomain: 'TU_AUTH_DOMAIN',
-    projectId: 'TU_PROJECT_ID',
-    storageBucket: 'TU_STORAGE_BUCKET',
-    messagingSenderId: 'TU_MESSAGING_SENDER_ID',
-    appId: 'TU_APP_ID'
+    apiKey: "AIzaSyCAoqn3PCRirTM7amdotBgMMQXa-y_WGiQ",
+    authDomain: "viggi-47ae5.firebaseapp.com",
+    projectId: "viggi-47ae5",
+    storageBucket: "viggi-47ae5.appspot.com",
+    messagingSenderId: "914051088702",
+    appId: "1:914051088702:web:764f45c708c67dc51f2c6f",
+    measurementId: "G-X4QHPD44XL"
   }
 };
 
