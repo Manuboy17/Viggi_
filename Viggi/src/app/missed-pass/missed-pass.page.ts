@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Auth, sendPasswordResetEmail } from '@angular/fire/auth';
 import { AlertController } from '@ionic/angular';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-missed-pass',
   templateUrl: './missed-pass.page.html',
@@ -10,7 +10,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class MissedPassPage implements OnInit {
   form: FormGroup;
-  constructor(private afAuth: Auth, private alertController: AlertController) { 
+  constructor(private afAuth: Auth, private alertController: AlertController, private router: Router) { 
     this.form = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
     });
@@ -25,7 +25,7 @@ export class MissedPassPage implements OnInit {
 
         // Muestra una alerta indicando que se ha enviado un correo electrónico de restablecimiento
         this.presentAlert('Correo Electrónico Enviado', 'Se ha enviado un correo electrónico de restablecimiento de contraseña a tu dirección de correo.');
-
+        this.router.navigate(['/login'])
       } catch (error) {
         console.error('Error al enviar el correo electrónico de restablecimiento:', error);
       }
