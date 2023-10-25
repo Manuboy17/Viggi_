@@ -26,15 +26,15 @@ export class LoginPage implements OnInit {
     if (this.form.valid) {
       const email = this.form.get('email')?.value;
       const password = this.form.get('password')?.value;
-
       try {
         // Inicia sesión con Firebase Authentication
         await signInWithEmailAndPassword(this.afAuth, email, password);
-
+        this.form.reset();
         this.presentAlert('Inicio sesion exitoso', 'Ha iniciado sesion con exito ');
         this.router.navigate(['/main']);
       } catch (error) {
-        console.error('Error al iniciar sesión:', error);
+        this.presentAlert('No se ha podido iniciar sesion', 'Revise si sus credenciales estan correctas');
+        this.form.reset();
       }
     }
   }

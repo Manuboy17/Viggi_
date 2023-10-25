@@ -49,8 +49,7 @@ export class RegistroPage implements OnInit {
           // Redirige al usuario a la página de inicio de sesión
           this.router.navigate(['/login']);
         } catch (error) {
-          // Maneja errores de registro
-          console.error('Error al registrar usuario:', error);
+          this.presentAlert('No se ha podido registrar', 'Revise si sus credenciales son validas');
         }
       }
     }
