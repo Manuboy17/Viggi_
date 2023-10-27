@@ -20,10 +20,8 @@ export class MissedPassPage implements OnInit {
       const email = this.form.get('email')?.value;
 
       try {
-        // Envía un correo electrónico de restablecimiento de contraseña
         await sendPasswordResetEmail(this.afAuth, email);
         this.form.reset();
-        // Muestra una alerta indicando que se ha enviado un correo electrónico de restablecimiento
         this.presentAlert('Correo Electrónico Enviado', 'Se ha enviado un correo electrónico de restablecimiento de contraseña a tu dirección de correo.');
         this.router.navigate(['/login'])
       } catch (error) {

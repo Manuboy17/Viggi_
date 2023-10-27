@@ -27,7 +27,6 @@ export class LoginPage implements OnInit {
       const email = this.form.get('email')?.value;
       const password = this.form.get('password')?.value;
       try {
-        // Inicia sesión con Firebase Authentication
         await signInWithEmailAndPassword(this.afAuth, email, password);
         this.form.reset();
         this.presentAlert('Inicio sesion exitoso', 'Ha iniciado sesion con exito ');
