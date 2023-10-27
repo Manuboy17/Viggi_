@@ -18,9 +18,8 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
     IonicModule.forRoot(), 
     AppRoutingModule,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
-    provideAuth(() => getAuth()),  
+    provideAuth(() => getAuth()),
   ],
-
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })
