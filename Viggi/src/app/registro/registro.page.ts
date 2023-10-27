@@ -37,10 +37,6 @@ export class RegistroPage implements OnInit {
         try {
           // Crea el usuario en Firebase Authentication
           const userCredential = await createUserWithEmailAndPassword(this.afAuth, email, password);
-
-          // Usuario registrado exitosamente
-          console.log('Usuario registrado:', userCredential.user);
-
           this.form.reset();
 
           // Muestra una alerta indicando que el usuario se ha creado con éxito
