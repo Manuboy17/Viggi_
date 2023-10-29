@@ -1,0 +1,23 @@
+* {
+    background-color: #0573BD;
+}
+.logo {
+    width: 250px; 
+    height: 250px; 
+    animation: liftAndRotate 2s ease infinite;
+}
+#container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}  
+@keyframes liftAndRotate {
+  0%, 100% {
+    transform: rotateY(0deg); /* Sin rotación al principio y al final */
+  }
+  50% {
+    transform: rotateY(180deg); /* Gira a la mitad del camino (180 grados) */
+  }
+}
