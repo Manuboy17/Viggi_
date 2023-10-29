@@ -29,7 +29,7 @@ export class LoginPage implements OnInit {
       try {
         await signInWithEmailAndPassword(this.afAuth, email, password);
         this.form.reset();
-        this.presentAlert('Inicio sesion exitoso', 'Ha iniciado sesion con exito ');
+        this.presentAlert('Inicio sesion exitoso', 'Bienvenido a Viggi');
         this.router.navigate(['/main']);
       } catch (error) {
         this.presentAlert('No se ha podido iniciar sesion', 'Revise si sus credenciales estan correctas');
