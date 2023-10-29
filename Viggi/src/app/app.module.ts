@@ -11,7 +11,6 @@ import { environment } from '../environments/environment';
 import { getAuth, provideAuth } from '@angular/fire/auth';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
