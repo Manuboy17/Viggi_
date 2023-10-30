@@ -33,6 +33,7 @@
     "@ionic-native/google-maps": "^5.5.0",
     "@ionic/angular": "^7.0.0",
     "cordova-plugin-geolocation": "^5.0.0",
+    "cordova-plugin-googlemaps": "^2.7.1",
     "ionicons": "^7.0.0",
     "rxjs": "^6.5.0",
     "tslib": "^2.3.0",
