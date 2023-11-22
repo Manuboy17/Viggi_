@@ -18,9 +18,6 @@ export class MainPage implements OnInit {
   map: GoogleMap | undefined;
   constructor() { }
 
-  ionViewDidLoad() {
-    this.loadMap();
-  }
   loadMap() {
     Environment.setEnv({
       'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDNtHCMNzjHWu5WxJ3i4iNQ2weKzmQk5Ow`)',
@@ -59,5 +56,6 @@ export class MainPage implements OnInit {
     console.log(ubicacion)
   };
   ngOnInit() {
+    this.loadMap();
   }
 }
