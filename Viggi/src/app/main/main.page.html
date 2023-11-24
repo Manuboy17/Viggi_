@@ -12,7 +12,11 @@
     <ion-content>
       <ion-list>
         <ion-menu-toggle auto-hide="false">
-          <ion-item>Busqueda de direccion</ion-item>
+          <ion-item routerLink="/busqueda">Busqueda de direccion</ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/update">Eliminar Cuenta</ion-item>
         </ion-menu-toggle>
         <ion-menu-toggle auto-hide="false">
           <ion-item (click)="cerrarSesion()">Cerrar sesion</ion-item>
