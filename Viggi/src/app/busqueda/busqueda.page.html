@@ -4,12 +4,21 @@
       <ion-title size="large">Barra de Búsqueda</ion-title>
     </ion-toolbar>
   </ion-header>
+  <ion-content>
+    <ion-item>
+      <ion-label stacked>Dirección</ion-label>
+      <ion-input type="text" [(ngModel)]="autocompleteInput" (input)="updateSearchResults()"></ion-input>
+    </ion-item>
+  
+    <ion-list *ngIf="predictions.length > 0">
+      <ion-item *ngFor="let prediction of predictions" (click)="selectSearchResult(prediction)">
+        {{ prediction.description }}
+      </ion-item>
+    </ion-list>
+  </ion-content>
 
-  <ion-searchbar (ionChange)="buscar($event)"></ion-searchbar>
-
-  <div id="map_canvas">
-    <!-- Aquí se mostrarán los resultados de la búsqueda -->
-  </div>
+  <div #mapContainer style="height: 400px;"></div>
+  
   <ion-menu side="start" contentId="main-content">
     <ion-header [translucent]="true">
       <ion-toolbar>
