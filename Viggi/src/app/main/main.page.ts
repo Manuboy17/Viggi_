@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { Geolocation } from '@capacitor/geolocation';
+import { ApiKey } from '../services/API';
+import { Auth } from '@angular/fire/auth';
 import {
   GoogleMaps,
   GoogleMap,
@@ -8,54 +10,56 @@ import {
   Marker,
   Environment
 } from '@ionic-native/google-maps';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.page.html',
   styleUrls: ['./main.page.scss'],
 })
 export class MainPage implements OnInit {
-
+  latitud: number | undefined;
+  longitud: number | undefined;
   map: GoogleMap | undefined;
-  constructor() { }
+  constructor(private router: Router, private afAuth: Auth) { }
 
-  loadMap() {
-    Environment.setEnv({
-      'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDNtHCMNzjHWu5WxJ3i4iNQ2weKzmQk5Ow`)',
-      'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDNtHCMNzjHWu5WxJ3i4iNQ2weKzmQk5Ow`)'
-    });
-
-    let mapOptions: GoogleMapOptions = {
+  ngOnInit() {
+    this.loadMap();
+  }
+  async cerrarSesion() {
+    try {
+      await this.afAuth.signOut();
+      this.router.navigate(['/home']);
+    } catch (error) {
+      // Manejar errores aquí
+    }
+  }
+  async loadMap() {
+    const location = await Geolocation.getCurrentPosition();
+    const mapOptions: GoogleMapOptions = {
       camera: {
-         target: {
-           lat: 43.0741904,
-           lng: -89.3809802
-         },
-         zoom: 18,
-         tilt: 30
-       }
+        target: {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude
+        },
+        zoom: 18,
+        tilt: 30
+      }
     };
 
     this.map = GoogleMaps.create('map_canvas', mapOptions);
 
-    let marker: Marker = this.map.addMarkerSync({
+    const marker: Marker = this.map.addMarkerSync({
       title: 'Ionic',
       icon: 'blue',
       animation: 'DROP',
       position: {
-        lat: 43.0741904,
-        lng: -89.3809802
+        lat: location.coords.latitude,
+        lng: location.coords.longitude
       }
     });
+
     marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-      alert('clicked');
+      alert('Marker clicked!');
     });
-  }
-  async obtenerMiUbicacion() {
-    let ubicacion = await Geolocation.getCurrentPosition();
-    console.log(ubicacion.coords.longitude, ubicacion.coords.latitude)
-    console.log(ubicacion)
-  };
-  ngOnInit() {
-    this.loadMap();
   }
 }
