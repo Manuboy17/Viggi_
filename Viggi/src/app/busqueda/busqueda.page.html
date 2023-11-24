@@ -10,4 +10,21 @@
   <div id="map_canvas">
     <!-- Aquí se mostrarán los resultados de la búsqueda -->
   </div>
+  <ion-menu side="start" contentId="main-content">
+    <ion-header [translucent]="true">
+      <ion-toolbar>
+        <ion-title>Localizacion</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/main">Pagina Principal</ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle auto-hide="false">
+          <ion-item routerLink="/update">Eliminar Cuenta</ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
 </ion-content>

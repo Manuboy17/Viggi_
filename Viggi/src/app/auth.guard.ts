@@ -21,7 +21,7 @@ export class AuthGuard implements CanActivate {
     if (this.afAuth.currentUser) {
       return true;
     } else {
-      return this.router.parseUrl('/home');
+      return this.router.parseUrl('/not-found');
     }
   }
 }

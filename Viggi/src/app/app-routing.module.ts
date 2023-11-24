@@ -31,13 +31,20 @@ const routes: Routes = [
   {
     path: 'splash',
     loadChildren: () => import('./splash/splash.module').then( m => m.SplashPageModule)
-  },  {
+  },
+  {
     path: 'update',
-    loadChildren: () => import('./update/update.module').then( m => m.UpdatePageModule)
+    loadChildren: () => import('./update/update.module').then( m => m.UpdatePageModule),
+    canActivate: [AuthGuard]
   },
   {
     path: 'busqueda',
-    loadChildren: () => import('./busqueda/busqueda.module').then( m => m.BusquedaPageModule)
+    loadChildren: () => import('./busqueda/busqueda.module').then( m => m.BusquedaPageModule),
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'not-found',
+    loadChildren: () => import('./not-found/not-found.module').then( m => m.NotFoundPageModule)
   },
 
 

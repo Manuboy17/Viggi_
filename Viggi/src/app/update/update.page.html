@@ -1,4 +1,22 @@
 <ion-content [fullscreen]="true">
+    <ion-menu side="start" contentId="main-content">
+      <ion-header [translucent]="true">
+        <ion-toolbar>
+          <ion-title>Localizacion</ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <ion-list>
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerLink="/main">Pagina Principal</ion-item>
+          </ion-menu-toggle>
+          
+          <ion-menu-toggle auto-hide="false">
+            <ion-item routerLink="/busqueda">Busqueda de direccion</ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Eliminar cuenta</ion-title>
