@@ -1,28 +1,26 @@
-<ion-content [fullscreen]="true">
+<ion-menu side="start" contentId="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Localizacion</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-menu-toggle auto-hide="false">
+        <ion-item routerLink="/busqueda">Busqueda de direccion</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="false">
+        <ion-item routerLink="/update">Eliminar Cuenta</ion-item>
+      </ion-menu-toggle>
+
+      <ion-menu-toggle auto-hide="false">
+        <ion-item (click)="cerrarSesion()">Cerrar sesion</ion-item>
+      </ion-menu-toggle>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
+<ion-content [fullscreen]="true" id="main-content">
   <div #mapContainer style="height: 100vh;"></div>
 </ion-content>
-<ion-app>
-  <ion-menu side="start" contentId="main-content">
-    <ion-header [translucent]="true">
-      <ion-toolbar>
-        <ion-title>Localizacion</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/busqueda">Busqueda de direccion</ion-item>
-        </ion-menu-toggle>
-
-        <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/update">Eliminar Cuenta</ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle auto-hide="false">
-          <ion-item (click)="cerrarSesion()">Cerrar sesion</ion-item>
-        </ion-menu-toggle>
-      </ion-list>
-    </ion-content>
-  </ion-menu>
-
-  <ion-router-outlet id="main-content"></ion-router-outlet>
-</ion-app>

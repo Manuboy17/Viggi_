@@ -1,54 +1,27 @@
-import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
-import { GoogleMap } from '@capacitor/google-maps';
-
+import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
+import { GeolocationPosition, Geolocation } from '@capacitor/geolocation';
 declare var google: any;
 
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.page.html',
   styleUrls: ['./busqueda.page.scss'],
-  template: `
-    <capacitor-google-map #map></capacitor-google-map>
-    <button (click)="createMap()">Create Map</button>
-  `,
-  styles: [
-    `
-      capacitor-google-map {
-        display: inline-block;
-        width: 275px;
-        height: 400px;
-      }
-    `,
-  ],
 })
 export class BusquedaPage implements OnInit {
+  latitud: number | undefined;
+  longitud: number | undefined;
   autocompleteInput: string = '';
   autocompleteService: any;
   predictions: any[] = [];
+  @ViewChild('mapContainer', { static: false }) mapContainer!: ElementRef;
+
+  map: any;
+  geocoder: any;
 
   constructor(private zone: NgZone) {
-    // Verifica si la librería de Google Maps está disponible
     if (typeof google !== 'undefined' && google.maps && google.maps.places) {
       this.autocompleteService = new google.maps.places.AutocompleteService();
-    
     }
-  }
-  @ViewChild('map', { static: false }) mapRef: ElementRef<HTMLElement> | undefined;
-  newMap: GoogleMap | undefined;
-
-  async createMap() {
-    this.newMap = await GoogleMap.create({
-      id: 'my-cool-map',
-      element: this.mapRef!.nativeElement,
-      apiKey: 'AIzaSyBEgBbRIC3M4SBnTTaf4d1xiDfbDwbxT3k',
-      config: {
-        center: {
-          lat: 33.6,
-          lng: -117.9,
-        },
-        zoom: 8,
-      },
-    });
   }
 
   updateSearchResults() {
@@ -70,12 +43,68 @@ export class BusquedaPage implements OnInit {
   }
 
   selectSearchResult(prediction: any) {
-    this.autocompleteInput = prediction.description;
-    // Aquí puedes manejar la selección del resultado de la búsqueda
-    console.log(prediction);
+    // ... código existente ...
+  
+    const geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'placeId': prediction.place_id }, (results: any, status: any) => {
+      if (status === 'OK') {
+        if (results[0]) {
+          const selectedLocation = results[0].geometry.location;
+  
+          // Código para generar la ruta desde la posición actual hasta la ubicación seleccionada
+          const directionsService = new google.maps.DirectionsService();
+          const directionsRenderer = new google.maps.DirectionsRenderer();
+  
+          directionsRenderer.setMap(this.map);
+  
+          const start = new google.maps.LatLng(this.latitud, this.longitud);
+          const end = selectedLocation;
+  
+          const request = {
+            origin: start,
+            destination: end,
+            travelMode: google.maps.TravelMode.DRIVING
+          };
+  
+          directionsService.route(request, (response: any, status: any) => {
+            if (status === 'OK') {
+              directionsRenderer.setDirections(response);
+            } else {
+              console.error('Error al calcular la ruta: ' + status);
+            }
+          });
+        } else {
+          console.error('No se encontraron resultados para esta predicción.');
+        }
+      } else {
+        console.error('La geocodificación falló debido a: ' + status);
+      }
+    });
+  
     this.predictions = [];
   }
+  
+  
+  ngAfterViewInit() {
+    Geolocation.getCurrentPosition().then((position: GeolocationPosition) => {
+      this.latitud = position.coords.latitude;
+      this.longitud = position.coords.longitude;
 
+      // Inicializar el mapa con la posición actual
+      const mapOptions = {
+        center: new google.maps.LatLng(this.latitud, this.longitud), 
+        zoom: 15,
+        mapTypeId: google.maps.MapTypeId.ROADMAP,
+      };
+      this.map = new google.maps.Map(this.mapContainer.nativeElement, mapOptions);
+
+      const marker = new google.maps.Marker({
+        map: this.map,
+        position: new google.maps.LatLng(this.latitud, this.longitud),
+        title: 'Tú'
+      });
+    });
+  }
   ngOnInit() {
   }
   

@@ -1,24 +1,26 @@
 <ion-content [fullscreen]="true">
+  
   <ion-header collapse="condense">
     <ion-toolbar>
       <ion-title size="large">Barra de Búsqueda</ion-title>
     </ion-toolbar>
   </ion-header>
-  <ion-content>
-    <ion-item>
-      <ion-label stacked>Dirección</ion-label>
-      <ion-input type="text" [(ngModel)]="autocompleteInput" (input)="updateSearchResults()"></ion-input>
+  
+
+  <ion-item>
+    <ion-label stacked>Dirección</ion-label>
+    <ion-input type="text" [(ngModel)]="autocompleteInput" (input)="updateSearchResults()"></ion-input>
+  </ion-item>
+
+
+  <ion-list *ngIf="predictions.length > 0" style="position: absolute; z-index: 1; width: 100%; max-height: 50%; overflow-y: auto;">
+    <ion-item *ngFor="let prediction of predictions" (click)="selectSearchResult(prediction)">
+      {{ prediction.description }}
     </ion-item>
-  
-    <ion-list *ngIf="predictions.length > 0">
-      <ion-item *ngFor="let prediction of predictions" (click)="selectSearchResult(prediction)">
-        {{ prediction.description }}
-      </ion-item>
-    </ion-list>
-  </ion-content>
-  
-  <capacitor-google-map #map></capacitor-google-map>
-  <button (click)="createMap()">Create Map</button>
+  </ion-list>
+
+
+  <div #mapContainer style="height: 100vh;"></div>
 
   <ion-menu side="start" contentId="main-content">
     <ion-header [translucent]="true">
@@ -30,9 +32,6 @@
       <ion-list>
         <ion-menu-toggle auto-hide="false">
           <ion-item routerLink="/main">Pagina Principal</ion-item>
-        </ion-menu-toggle>
-        <ion-menu-toggle auto-hide="false">
-          <ion-item routerLink="/update">Eliminar Cuenta</ion-item>
         </ion-menu-toggle>
       </ion-list>
     </ion-content>

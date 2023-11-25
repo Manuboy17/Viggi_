@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { GeolocationPosition, Geolocation } from '@capacitor/geolocation';
 import { Auth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
@@ -56,7 +56,7 @@ export class MainPage implements OnInit, AfterViewInit {
       await this.afAuth.signOut();
       this.router.navigate(['/home']);
     } catch (error) {
-      // Manejar errores aquí
+      
     }
   }
 }
