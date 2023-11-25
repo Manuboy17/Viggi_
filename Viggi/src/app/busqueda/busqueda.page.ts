@@ -1,5 +1,6 @@
 import { Component, OnInit, NgZone, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
 import { GeolocationPosition, Geolocation } from '@capacitor/geolocation';
+import { AlertController } from '@ionic/angular';
 declare var google: any;
 
 @Component({
@@ -18,7 +19,7 @@ export class BusquedaPage implements OnInit {
   map: any;
   geocoder: any;
 
-  constructor(private zone: NgZone) {
+  constructor(private zone: NgZone, private alertController: AlertController) {
     if (typeof google !== 'undefined' && google.maps && google.maps.places) {
       this.autocompleteService = new google.maps.places.AutocompleteService();
     }
@@ -43,8 +44,6 @@ export class BusquedaPage implements OnInit {
   }
 
   selectSearchResult(prediction: any) {
-    // ... código existente ...
-  
     const geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'placeId': prediction.place_id }, (results: any, status: any) => {
       if (status === 'OK') {
@@ -70,7 +69,7 @@ export class BusquedaPage implements OnInit {
             if (status === 'OK') {
               directionsRenderer.setDirections(response);
             } else {
-              console.error('Error al calcular la ruta: ' + status);
+              this.presentAlert('Demasiado lejos', 'La direccion seleccionada se encuentra fuera de alcanze');
             }
           });
         } else {
@@ -90,7 +89,6 @@ export class BusquedaPage implements OnInit {
       this.latitud = position.coords.latitude;
       this.longitud = position.coords.longitude;
 
-      // Inicializar el mapa con la posición actual
       const mapOptions = {
         center: new google.maps.LatLng(this.latitud, this.longitud), 
         zoom: 15,
@@ -105,7 +103,17 @@ export class BusquedaPage implements OnInit {
       });
     });
   }
+  async presentAlert(title: string, message: string) {
+    const alert = await this.alertController.create({
+      header: title,
+      message: message,
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
   ngOnInit() {
   }
+
   
 }
