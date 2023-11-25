@@ -1,12 +1,25 @@
-import { Component, OnInit, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone, ElementRef, ViewChild } from '@angular/core';
+import { GoogleMap } from '@capacitor/google-maps';
 
-// Agrega esta línea para definir globalmente la variable google
 declare var google: any;
 
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.page.html',
   styleUrls: ['./busqueda.page.scss'],
+  template: `
+    <capacitor-google-map #map></capacitor-google-map>
+    <button (click)="createMap()">Create Map</button>
+  `,
+  styles: [
+    `
+      capacitor-google-map {
+        display: inline-block;
+        width: 275px;
+        height: 400px;
+      }
+    `,
+  ],
 })
 export class BusquedaPage implements OnInit {
   autocompleteInput: string = '';
@@ -20,9 +33,22 @@ export class BusquedaPage implements OnInit {
     
     }
   }
+  @ViewChild('map', { static: false }) mapRef: ElementRef<HTMLElement> | undefined;
+  newMap: GoogleMap | undefined;
 
-  ngOnInit() {
-    // Aquí podrías inicializar algunas configuraciones adicionales si las necesitas
+  async createMap() {
+    this.newMap = await GoogleMap.create({
+      id: 'my-cool-map',
+      element: this.mapRef!.nativeElement,
+      apiKey: 'AIzaSyBEgBbRIC3M4SBnTTaf4d1xiDfbDwbxT3k',
+      config: {
+        center: {
+          lat: 33.6,
+          lng: -117.9,
+        },
+        zoom: 8,
+      },
+    });
   }
 
   updateSearchResults() {
@@ -50,5 +76,7 @@ export class BusquedaPage implements OnInit {
     this.predictions = [];
   }
 
+  ngOnInit() {
+  }
   
 }

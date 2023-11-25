@@ -16,9 +16,10 @@
       </ion-item>
     </ion-list>
   </ion-content>
-
-  <div #mapContainer style="height: 400px;"></div>
   
+  <capacitor-google-map #map></capacitor-google-map>
+  <button (click)="createMap()">Create Map</button>
+
   <ion-menu side="start" contentId="main-content">
     <ion-header [translucent]="true">
       <ion-toolbar>
