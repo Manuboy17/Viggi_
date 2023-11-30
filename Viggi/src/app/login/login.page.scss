@@ -1,26 +1,28 @@
 * {
+  background-color: white;
+  margin: 0;
+}
+#container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  height: 250px;
+  width: 250px;
+}
 
-    margin: 0;
-  }
-  #container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-  }
-  .logo {
-    height: 250px;
-    width: 250px;
-  }
-  .formulario {
-    background-color: white;
-  }
-  .extra-opc {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.formulario {
+  width: 90%;
+  max-width: 350px; 
+}
 
-  }
+.extra-opc {
+  margin-top: 20px;
+}
+
+.btn-submit {
+  margin-top: 20px; 
+}

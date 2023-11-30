@@ -103,6 +103,9 @@ export class BusquedaPage implements OnInit {
       });
     });
   }
+  
+
+
   async presentAlert(title: string, message: string) {
     const alert = await this.alertController.create({
       header: title,
