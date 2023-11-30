@@ -24,7 +24,7 @@ export class BusquedaPage implements OnInit {
       this.autocompleteService = new google.maps.places.AutocompleteService();
     }
   }
-
+  
   updateSearchResults() {
     if (!this.autocompleteService) {
       console.error('La librería de Google Maps no se ha cargado correctamente.');
